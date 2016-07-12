@@ -1,8 +1,8 @@
 defmodule NervesIoRc522Test do
   use ExUnit.Case
-  doctest NervesIoRc522
 
-  test "the truth" do
-    assert 1 + 1 == 2
+  test "RC522 process has been started" do
+    assert is_pid(Process.whereis(Nerves.IO.RC522.Worker))
+    :timer.sleep(2000)
   end
 end

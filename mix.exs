@@ -2,7 +2,7 @@ defmodule NervesIoRc522.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :elixir_ale,
+    [app: :nerves_io_rc522,
      version: "0.1.0",
      elixir: "~> 1.2",
      name: "nerves_io_rc522",
@@ -18,7 +18,7 @@ defmodule NervesIoRc522.Mixfile do
 
   def application do
     [applications: [:logger],
-     module: Nerves.IO.RC522]
+     mod: {Nerves.IO.RC522, []}]
   end
 
   defp description do
