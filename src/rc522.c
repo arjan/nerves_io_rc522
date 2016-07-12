@@ -143,7 +143,6 @@ char PcdRead(uint8_t addr,uint8_t *p )
 
 	status = PcdComMF522(PCD_TRANSCEIVE,ucComMF522Buf,4,ucComMF522Buf,&unLen);
 	CalulateCRC(ucComMF522Buf,16,CRC_buff);
-	//	printf("debug %02x%02x %02x%02x   ",ucComMF522Buf[16],ucComMF522Buf[17],CRC_buff[0],CRC_buff[1]);
 
 	if ((status == TAG_OK) && (unLen == 0x90))
 	{
@@ -383,7 +382,6 @@ char PcdComMF522(uint8_t   Command,
 			status = TAG_ERR;}
 
 		if (PcdErr&0x08) {
-			if (debug) fprintf (stderr,"COllision \n");
 			status = TAG_COLLISION;
 
 		}

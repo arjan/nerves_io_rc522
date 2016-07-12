@@ -17,4 +17,4 @@ erl_crash.dump
 *.ez
 
 src/*.o
-src/rc522
+priv/rc522
