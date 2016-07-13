@@ -60,3 +60,11 @@ Connecting RC522 module to SPI is pretty easy. You can use
 | GND            | 6         | 6, 9, 20, 25     | Ground       |
 | RST            | 7         | 22               | GPIO25       |
 | 3.3V           | 8         | 1                | 3V3          |
+
+
+## License
+
+This library is distributed under the Apache license.  The `rc522`
+port driver, however, is distributed as GPLv2, as it incorporates the
+(BCM2835)[http://www.airspayce.com/mikem/bcm2835/] driver library. See
+src/ COPYING for details.
