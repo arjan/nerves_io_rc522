@@ -1,7 +1,7 @@
 defmodule NervesIoRc522Test do
   use ExUnit.Case
 
-  test "RC522 process has been started" do
+  test "RC522 port process talks to us in test mode" do
 
     parent = self()
 
@@ -13,7 +13,7 @@ defmodule NervesIoRc522Test do
       {:tag, _tag} ->
         :ok
     after 1000 ->
-      assert false
+        assert false
     end
 
   end

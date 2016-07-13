@@ -1,5 +1,7 @@
 # Nerves.IO.RC522
 
+[![Build Status](https://travis-ci.org/arjan/nerves_io_rc522.svg)](https://travis-ci.org/zotonic/zotonic)
+
 Nerves support for the RC522 RFID reader.
 
 The RC522 is a
