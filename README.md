@@ -66,7 +66,10 @@ Connecting RC522 module to SPI is pretty easy. You can use
 
 ## License
 
-This library is distributed under the Apache license.  The `rc522`
-port driver, however, is distributed as GPLv2, as it incorporates the
-(BCM2835)[http://www.airspayce.com/mikem/bcm2835/] driver library. See
-src/ COPYING for details.
+The Elixir code of this library is distributed under the Apache
+license.
+
+The files in the `src` directory contain the `rc522` port driver,
+which is distributed as GPLv2, as it incorporates the
+[BCM2835](http://www.airspayce.com/mikem/bcm2835/) driver library. See
+`src/COPYING` for the GPL license.
