@@ -9,7 +9,6 @@
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
-#include <syslog.h>
 #include <sys/wait.h>
 #include <signal.h>
 #include "rfid.h"
@@ -64,21 +63,25 @@ int main(int argc, char *argv[]) {
 
 	for (;;) {
 		status= find_tag(&CType);
-		if (status==TAG_NOTAG) {
+		if (status == TAG_NOTAG) {
 			usleep(50000);
 			continue;
-		}else if ((status!=TAG_OK)&&(status!=TAG_COLLISION)) {continue;}
+		} else if ((status!=TAG_OK) && (status!=TAG_COLLISION)) {
+            continue;
+        }
 
-		if (select_tag_sn(SN,&SN_len)!=TAG_OK) {continue;}
+		if (select_tag_sn(SN,&SN_len) != TAG_OK) {
+            continue;
+        }
 
-		p=sn_str;
+		p = sn_str;
 		for (tmp=0;tmp<SN_len;tmp++) {
-			sprintf(p,"%02x",SN[tmp]);
+			sprintf(p,"%02X",SN[tmp]);
 			p+=2;
 		}
-		//for debugging
-        *p=0;
-        fprintf(stderr,"Type: %04x, Serial: %s\n",CType,&sn_str[1]);
+        *p = 0;
+
+        fprintf(stderr,"Type: %04X, Serial: %s\n",CType,&sn_str[1]);
         send_tag(sn_str, 2 * SN_len);
 
 		PcdHalt();
@@ -96,7 +99,7 @@ uint8_t spi_init(uint32_t spi_speed) {
 
 	sp=(uint16_t)(250000L/spi_speed);
 	if (!bcm2835_init()) {
-		syslog(LOG_DAEMON|LOG_ERR,"Can't init bcm2835!\n");
+		dbg("Can't init BCM2835!");
 		return 1;
 	}
 
