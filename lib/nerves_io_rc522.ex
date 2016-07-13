@@ -75,7 +75,7 @@ defmodule Nerves.IO.RC522 do
       :test ->
         ["test"];
       _ ->
-        [Integer.to_string(1000000)]
+        [Integer.to_string(5000)]
     end
   end
 
