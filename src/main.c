@@ -18,6 +18,7 @@
 #include <ei.h>
 
 #define err(code, msg) (fprintf(stderr, msg "\n"),exit(code));
+#define dbg(msg) (fprintf(stderr, msg "\n"));
 
 void erlcmd_send(char *response, size_t len);
 uint8_t spi_init(uint32_t spi_speed);
@@ -37,13 +38,18 @@ int main(int argc, char *argv[]) {
 
 	uint32_t spi_speed = 10000000L;
 
-    for (;;) {
-        send_tag("foo", 3);
-        usleep(1000000);
-    }
 
 	if (argc != 2) {
-        err(1, "Usage: rc522 <spi_speed>");
+        err(1, "Usage: rc522 <spi_speed|test>");
+    }
+
+    // test mode; send tag to host every second
+    if (!strcmp(argv[1], "test")) {
+        dbg("RC522 port test mode.");
+        for (;;) {
+            send_tag("foo", 3);
+            usleep(1000000);
+        }
     }
 
     spi_speed = (uint32_t)strtoul(argv[1],NULL,10);
@@ -132,7 +138,8 @@ void erlcmd_send(char *response, size_t len)
             if (errno == EINTR)
                 continue;
 
-            err(EXIT_FAILURE, "write");
+            //err(EXIT_FAILURE, "write");
+            exit(0);
         }
 
         wrote += amount_written;

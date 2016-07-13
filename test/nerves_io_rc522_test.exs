@@ -2,7 +2,19 @@ defmodule NervesIoRc522Test do
   use ExUnit.Case
 
   test "RC522 process has been started" do
-    assert is_pid(Process.whereis(Nerves.IO.RC522.Worker))
-    :timer.sleep(2000)
+
+    parent = self()
+
+    {:ok, _pid} = Nerves.IO.RC522.start_link(fn(tag) ->
+      send(parent, {:tag, tag})
+    end)
+
+    receive do
+      {:tag, _tag} ->
+        :ok
+    after 1000 ->
+      assert false
+    end
+
   end
 end
