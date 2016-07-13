@@ -1,11 +1,24 @@
-# nerves_io_rc522
+# Nerves.IO.RC522
 
 Nerves support for the RC522 RFID reader.
 
+The RC522 is a
+[cheap](http://www.banggood.com/RC522-Chip-IC-Card-Induction-Module-RFID-Reader-p-81067.html)
+RFID module which can be used to read MIFARE-compatible tags at
+13.56Mhz.
+
+## Limitations
+
+Currently, only Raspberry PI is supported as the host platform due to
+the usage of the [BCM2835](http://www.airspayce.com/mikem/bcm2835/)
+library in the Port driver.
+
+Furthermore, this library currently only reads the tag UID. The RC522
+supports reading and writing MIFARE tag data, but this library does
+not yet support it.
+
 
 ## Installation
-
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed as:
 
   1. Add `nerves_io_rc522` to your list of dependencies in `mix.exs`:
 
@@ -22,3 +35,28 @@ If [available in Hex](https://hex.pm/docs/publish), the package can be installed
       [applications: [:nerves_io_rc522]]
     end
     ```
+
+## Usage
+
+Add the `Nerves.IO.RC522` GenServer to your supervision tree:
+
+    worker(Nerves.IO.RC522, [{RfidReader.Handler, :tag_scanned}])
+
+When a tag is scanned the function `RfidReader.Handler.tag_scanned()`
+function will now be called with the hex-encoded serial number (UID)
+of the scanned tag as its single argument.
+
+## Connecting the hardware
+
+Connecting RC522 module to SPI is pretty easy. You can use
+[this neat website](http://pi.gadgetoid.com/pinout) for reference.
+
+| Board pin name | Board pin | Physical RPi pin | RPi pin name |
+|----------------|-----------|------------------|--------------|
+| SDA            | 1         | 24               | GPIO8, CE0   |
+| SCK            | 2         | 23               | GPIO11, SCKL |
+| MOSI           | 3         | 19               | GPIO10, MOSI |
+| MISO           | 4         | 21               | GPIO9, MISO  |
+| GND            | 6         | 6, 9, 20, 25     | Ground       |
+| RST            | 7         | 22               | GPIO25       |
+| 3.3V           | 8         | 1                | 3V3          |
