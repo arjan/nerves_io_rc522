@@ -9,6 +9,13 @@ The RC522 is a
 RFID module which can be used to read MIFARE-compatible tags at
 13.56Mhz.
 
+Combined with a Raspberry Pi, this makes for a pretty compact RFID
+reader. The RC522 board is so small it easily fits inside most
+raspberry pi cases.
+
+![Image of RC522 + Pi](reader.jpg)
+
+
 ## Limitations
 
 Currently, only Raspberry PI is supported as the host platform due to
