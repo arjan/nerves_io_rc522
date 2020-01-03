@@ -49,7 +49,7 @@ not yet support it.
 
 Add the `Nerves.IO.RC522` GenServer to your supervision tree:
 
-    worker(Nerves.IO.RC522, [{RfidReader.Handler, :tag_scanned}])
+    {Nerves.IO.RC522, [{RfidReader.Handler, :tag_scanned}]}
 
 When a tag is scanned the function `RfidReader.Handler.tag_scanned()`
 function will now be called with the hex-encoded serial number (UID)
