@@ -51,9 +51,8 @@ defmodule Nerves.IO.RC522 do
 
   defp restart(state) do
     executable = :code.priv_dir(:nerves_io_rc522) ++ '/rc522'
-    args
     port = Port.open({:spawn_executable, executable},
-                     [{:args, args},
+                     [{:args, args()},
                       {:packet, 2},
                       :use_stdio,
                       :binary,
